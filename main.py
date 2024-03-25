@@ -94,7 +94,7 @@ def saveFile(fileName, value):
 find = False
 lastTime = datetime.now()
 
-pressButton(APos, 0.1)
+time.sleep(2)
 
 while not find:
     print('NOMBRE ESSAIS : ', count)
@@ -102,11 +102,12 @@ while not find:
         break
     print('STARTED')
     for emulator in emulators:
+        print("EMULATOR : ", emulator["name"])
         pressButton(emulator['APos'])
         pyautogui.keyDown('x')
         pyautogui.keyUp('x')
 
-        if (datetime.now() - emulator["lastTime"]).seconds > 20:
+        if (datetime.now() - emulator["lastTime"]).seconds > 40:
             print('FOUND')
             find = True
             # onFound()
