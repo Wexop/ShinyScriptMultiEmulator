@@ -66,8 +66,7 @@ def checkColor(x, y):
 
 
 def onFound():
-    MessageBox = ctypes.windll.user32.MessageBoxW
-    MessageBox(None, 'SHINY ????', 'Window title', 0)
+    pass
 
 
 def checkCloseColor(color1, color2):
@@ -100,20 +99,17 @@ while not find:
     print('NOMBRE ESSAIS : ', count)
     if keyboard.is_pressed('q'):
         break
-    print('STARTED')
+    print('POUR SORTIR DE LA BOUCLE : q')
     for emulator in emulators:
-        print("EMULATOR : ", emulator["name"])
         pressButton(emulator['APos'])
-        pyautogui.keyDown('x')
-        pyautogui.keyUp('x')
+        keyboard.press('x')
 
         if (datetime.now() - emulator["lastTime"]).seconds > 40:
             print('FOUND')
             find = True
-            # onFound()
+            onFound()
 
-        print('COLOR CHECKED ', checkColor(emulator["colorPos"][0], emulator["colorPos"][1]), 'INITIAL COLOR ', emulator["pixelColor"])
-        print('POUR SORTIR DE LA BOUCLE : q')
+        #print('COLOR CHECKED ', checkColor(emulator["colorPos"][0], emulator["colorPos"][1]), 'INITIAL COLOR ', emulator["pixelColor"])
         if checkCloseColor2(emulator["colorPos"], emulator["pixelColor"]):
             count += 1
             saveFile('count.txt', count)

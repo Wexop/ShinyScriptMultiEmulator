@@ -2,8 +2,6 @@ import pyautogui
 from PIL import ImageGrab
 from pynput.mouse import Listener, Button
 
-
-
 pixels = []
 APos = (0, 0)
 pixelColor = (255, 255, 255)
@@ -18,15 +16,18 @@ if not names:
 
 emulName = input("Nom de l'émulateur que vous voulez modifier : ")
 
+
 def saveEmulator(value, name):
     f = open(f"EMUL-{str(emulName)}-{name}", "w")
     f.write(str(value))
     f.close()
 
+
 def save(value, name):
     f = open(name, "w")
     f.write(str(value))
     f.close()
+
 
 if emulName not in names:
     names.append(emulName)
@@ -51,8 +52,8 @@ def on_click(x, y, button, pressed):
     elif config == 'color':
         pixelColor = checkColor(x, y)
         print(pixelColor)
-        saveEmulator( pixelColor, 'pixelColor.txt')
-        saveEmulator( pos, 'colorPos.txt')
+        saveEmulator(pixelColor, 'pixelColor.txt')
+        saveEmulator(pos, 'colorPos.txt')
         listener.stop()
     else:
         pixels.append(pos)
@@ -63,10 +64,6 @@ def on_click(x, y, button, pressed):
 
 def checkColor(x, y):
     return pyautogui.pixel(x, y)
-
-
-
-
 
 
 with Listener(on_click=on_click) as listener:
