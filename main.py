@@ -105,7 +105,7 @@ while not find:
         break
     if (datetime.now() - minuteTime).seconds >= 60:
         minuteTime = datetime.now()
-        message = f"1 MINUTE PASSED : {countMinute} ESSAIES"
+        message = f"1 MINUTE PASSED : {countMinute  } ESSAIES \n"
         print(message)
         countMinute = 0
         f = open("minute-average.txt", 'a')
