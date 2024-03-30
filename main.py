@@ -92,6 +92,8 @@ def saveFile(fileName, value):
 
 find = False
 lastTime = datetime.now()
+minuteTime = datetime.now()
+countMinute = 0
 
 time.sleep(2)
 
@@ -101,11 +103,14 @@ while not find:
     if keyboard.is_pressed('q'):
         keyboard.release('tab')
         break
-    print('POUR SORTIR DE LA BOUCLE : q')
+    if (datetime.now() - minuteTime).seconds >= 60:
+        minuteTime = datetime.now()
+        print("1 MINUTE PASSED : ", countMinute, " ESSAIES")
+        countMinute = 0
+
     for emulator in emulators:
         pressButton(emulator['APos'])
         keyboard.press('x')
-
         if (datetime.now() - emulator["lastTime"]).seconds > 15:
             print('FOUND')
             find = True
@@ -114,8 +119,10 @@ while not find:
         #print('COLOR CHECKED ', checkColor(emulator["colorPos"][0], emulator["colorPos"][1]), 'INITIAL COLOR ', emulator["pixelColor"])
         if checkCloseColor2(emulator["colorPos"], emulator["pixelColor"]):
             count += 1
+            countMinute += 1
             saveFile('count.txt', count)
             print('NOMBRE ESSAIS : ', count)
+            print('POUR SORTIR DE LA BOUCLE : q')
             for i in range(len(emulator["pixelCoords"])):
                 if keyboard.is_pressed('q'):
                     keyboard.release('tab')
