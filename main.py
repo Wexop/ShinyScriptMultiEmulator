@@ -105,8 +105,12 @@ while not find:
         break
     if (datetime.now() - minuteTime).seconds >= 60:
         minuteTime = datetime.now()
-        print("1 MINUTE PASSED : ", countMinute, " ESSAIES")
+        message = f"1 MINUTE PASSED : {countMinute} ESSAIES"
+        print(message)
         countMinute = 0
+        f = open("minute-average.txt", 'a')
+        f.write(message )
+        f.close()
 
     for emulator in emulators:
         pressButton(emulator['APos'])
