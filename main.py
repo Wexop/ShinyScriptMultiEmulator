@@ -95,16 +95,19 @@ lastTime = datetime.now()
 
 time.sleep(2)
 
+keyboard.press('tab')
+
 while not find:
     print('NOMBRE ESSAIS : ', count)
     if keyboard.is_pressed('q'):
+        keyboard.release('tab')
         break
     print('POUR SORTIR DE LA BOUCLE : q')
     for emulator in emulators:
         pressButton(emulator['APos'])
         keyboard.press('x')
 
-        if (datetime.now() - emulator["lastTime"]).seconds > 40:
+        if (datetime.now() - emulator["lastTime"]).seconds > 15:
             print('FOUND')
             find = True
             onFound()
@@ -115,6 +118,7 @@ while not find:
             saveFile('count.txt', count)
             for i in range(len(emulator["pixelCoords"])):
                 if keyboard.is_pressed('q'):
+                    keyboard.release('tab')
                     break
                 pressButton(emulator["pixelCoords"][i])
             emulator["lastTime"] = datetime.now()
