@@ -122,4 +122,4 @@ while not find:
                     break
                 pressButton(emulator["pixelCoords"][i])
             emulator["lastTime"] = datetime.now()
-            print('RERUN')
+            #print('RERUN')
