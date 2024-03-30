@@ -98,7 +98,6 @@ time.sleep(2)
 keyboard.press('tab')
 
 while not find:
-    print('NOMBRE ESSAIS : ', count)
     if keyboard.is_pressed('q'):
         keyboard.release('tab')
         break
@@ -116,6 +115,7 @@ while not find:
         if checkCloseColor2(emulator["colorPos"], emulator["pixelColor"]):
             count += 1
             saveFile('count.txt', count)
+            print('NOMBRE ESSAIS : ', count)
             for i in range(len(emulator["pixelCoords"])):
                 if keyboard.is_pressed('q'):
                     keyboard.release('tab')
